@@ -7,9 +7,9 @@ class MattermostListener < Redmine::Hook::Listener
 		channels = channels_for_project issue.project
 		url = url_for_project issue.project
 
+		issue.notification_mattermost = context[:params][:notification_mattermost]
 
-
-		if issue.params[notification_mattermost] == '0'
+		if issue.notification_mattermost == '0'
 			return
 		end
 
