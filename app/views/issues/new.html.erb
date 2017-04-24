@@ -2,6 +2,19 @@
 
 <%= call_hook(:view_issues_new_top, {:issue => @issue}) %>
 
+
+<%= labelled_fields_for :issue, @issue do |f| %>
+<%= call_hook(:view_issues_form_details_top, { :issue => @issue, :form => f }) %>
+<%= hidden_field_tag 'form_update_triggered_by', '' %>
+<%= hidden_field_tag 'back_url', params[:back_url], :id => nil if params[:back_url].present? %>
+
+<% if @issue.safe_attribute? 'notification_mattermost' %>
+    <p id="issue_notification_mattermost">
+      <%= f.check_box :notification_mattermost, :no_label => true %><label class="inline" for="issue_notification_mattermost" id="issue_is_notification_mattermost_label">Mattermost Notification</label>
+    </p>
+<% end %>
+
+
 <%= labelled_form_for @issue, :url => _project_issues_path(@project),
                              :html => {:id => 'issue-form', :multipart => true} do |f| %>
   <%= error_messages_for 'issue' %>
@@ -44,13 +57,6 @@
                   :method => 'get' %>
       </span>
       </p>
-    <% end %>
-
-    <hr>
-    <% if @issue.safe_attribute? 'notification_mattermost' %>
-    <p id="issue_is_notification_wrap">
-      <%= f.check_box :notification_mattermost, :no_label => true %><label class="inline" for="issue_notification_mattermost" id="issue_is_notification_label"><%= l(:field_notification_mattermost) %></label>
-    </p>
     <% end %>
 
   </div>

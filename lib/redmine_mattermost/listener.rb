@@ -12,9 +12,8 @@ class MattermostListener < Redmine::Hook::Listener
 		return unless channels.any? and url
 		return if issue.is_private?
 
-		if issue.notification_mattermost == '0'
-			return
-		end
+		return unless issue.notification_mattermost?
+
 
 		msg = "[#{escape issue.project}] #{escape issue.author} created <#{object_url issue}|#{escape issue}>#{mentions issue.description}"
 
