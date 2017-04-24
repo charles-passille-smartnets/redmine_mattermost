@@ -7,6 +7,10 @@ class MattermostListener < Redmine::Hook::Listener
 		channels = channels_for_project issue.project
 		url = url_for_project issue.project
 
+		if params[:notification_mattermost] == '1'
+			return
+		end
+
 		return unless channels.any? and url
 		return if issue.is_private?
 
@@ -138,7 +142,7 @@ class MattermostListener < Redmine::Hook::Listener
 		}
 
 		params[:username] = username if username
-		
+
 
 		params[:attachments] = [attachment] if attachment
 
