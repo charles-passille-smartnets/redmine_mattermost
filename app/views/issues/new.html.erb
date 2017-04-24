@@ -47,12 +47,14 @@
     <% end %>
 
     <hr>
-    <span class="pushMM">
-        <label for="notification_mattermost">Mattermostに通知</label>
-        <%= check_box_tag "notification_mattermost[]" %>
+    <p>
+        <span class="pushMM">
+            <label for="notification_mattermost">Mattermostに通知</label>
+            <%= check_box_tag "notification_mattermost[]" %>
 
-    </span>
-    
+        </span>
+    </p>
+
   </div>
 
   <%= submit_tag l(:button_create) %>
