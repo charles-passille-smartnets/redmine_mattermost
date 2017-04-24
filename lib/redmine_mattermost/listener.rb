@@ -8,10 +8,11 @@ class MattermostListener < Redmine::Hook::Listener
 		url = url_for_project issue.project
 
 
-		if issue.safe_attributes[:notification_mattermost] == '0'
+
+		if context[:issue].notification_mattermost == '0'
 			return
 		end
-		
+
 		return unless channels.any? and url
 		return if issue.is_private?
 
