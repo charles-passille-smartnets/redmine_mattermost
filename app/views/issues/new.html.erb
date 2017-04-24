@@ -47,13 +47,11 @@
     <% end %>
 
     <hr>
-    <p>
-        <span class="pushMM">
-            <label for="notification_mattermost">Mattermostに通知</label>
-            <%= check_box_tag "notification_mattermost" %>
-
-        </span>
+    <% if @issue.safe_attribute? 'notification_mattermost' %>
+    <p id="issue_is_notification_wrap">
+      <%= f.check_box :notification_mattermost, :no_label => true %><label class="inline" for="issue_notification_mattermost" id="issue_is_notification_label"><%= l(:field_notification_mattermost) %></label>
     </p>
+    <% end %>
 
   </div>
 
