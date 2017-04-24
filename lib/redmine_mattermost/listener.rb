@@ -53,6 +53,7 @@ class MattermostListener < Redmine::Hook::Listener
 		return unless channels.any? and url and Setting.plugin_redmine_mattermost[:post_updates] == '1'
 		return if issue.is_private?
 		return if journal.private_notes?
+		return unless issue.notification_mattermost?
 
 		msg = "[#{escape issue.project}] #{escape journal.user.to_s} updated <#{object_url issue}|#{escape issue}>#{mentions journal.notes}"
 
