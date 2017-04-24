@@ -7,11 +7,12 @@ class MattermostListener < Redmine::Hook::Listener
 		channels = channels_for_project issue.project
 		url = url_for_project issue.project
 
+	    p params['notification_mattermost']
 
 		return unless channels.any? and url
 		return if issue.is_private?
 
-		return unless issue.mattermost_notification?
+		return unless params['notification_mattermost']?
 
 
 
@@ -41,6 +42,7 @@ class MattermostListener < Redmine::Hook::Listener
 
 		speak msg, channels, attachment, url
 	end
+
 
 	def redmine_mattermost_issues_edit_after_save(context={})
 		issue = context[:issue]
