@@ -9,7 +9,7 @@ class MattermostListener < Redmine::Hook::Listener
 
 
 
-		if context[:issue].notification_mattermost == '0'
+		if issue.params[notification_mattermost] == '0'
 			return
 		end
 
